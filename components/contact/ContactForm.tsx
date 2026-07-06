@@ -1,8 +1,10 @@
 "use client"
 
 import { Send } from "lucide-react"
-import { useState, type FormEvent, type ReactNode } from "react"
+import { useActionState, useEffect, useRef, useState, type ReactNode } from "react"
+import { useFormStatus } from "react-dom"
 
+import { submitContactForm } from "@/app/actions/contact"
 import { Container } from "@/components/layout/Container"
 import { Section } from "@/components/layout/Section"
 import { Heading } from "@/components/typography/Heading"
@@ -37,15 +39,39 @@ function FormField({ id, label, children }: FormFieldProps) {
   )
 }
 
-function ContactForm() {
-  const [submitted, setSubmitted] = useState(false)
+function SubmitButton() {
+  const { pending } = useFormStatus()
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    // No backend endpoint yet — wire this up to the real submission API
-    // once it exists. Fields/names below are stable for that integration.
-    setSubmitted(true)
-  }
+  return (
+    <Button type="submit" disabled={pending}>
+      {pending ? "Sending..." : "Request a Strategy Call"}
+      <Send aria-hidden="true" data-icon="inline-end" />
+    </Button>
+  )
+}
+
+function ContactForm() {
+  const [state, formAction] = useActionState(submitContactForm, {
+    status: "idle",
+  })
+  const formRef = useRef<HTMLFormElement>(null)
+  const selectRef = useRef<HTMLSelectElement>(null)
+  // Controlled because native form-reset (triggered after every action
+  // dispatch, including errors) restores a <select> to its first option.
+  // React re-applies `value` on the next render, but the reset itself is a
+  // raw DOM mutation that lands after that render commits, so we also
+  // resync the DOM node imperatively once the action settles.
+  const [engagementType, setEngagementType] = useState("")
+
+  useEffect(() => {
+    if (state.status === "success") {
+      formRef.current?.reset()
+      return
+    }
+    if (selectRef.current) {
+      selectRef.current.value = engagementType
+    }
+  }, [state, engagementType])
 
   return (
     <Section id="contact-form" size="lg">
@@ -60,7 +86,7 @@ function ContactForm() {
           </Text>
         </div>
 
-        {submitted ? (
+        {state.status === "success" ? (
           <div
             role="status"
             className="mt-12 rounded-xl border border-border bg-muted/40 p-8 text-center"
@@ -74,7 +100,20 @@ function ContactForm() {
             </Text>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-6">
+          <form
+            ref={formRef}
+            action={formAction}
+            className="mt-12 flex flex-col gap-6"
+          >
+            {state.status === "error" && state.message && (
+              <div
+                role="alert"
+                className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+              >
+                {state.message}
+              </div>
+            )}
+
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <FormField id="name" label="Full name">
                 <input
@@ -83,6 +122,7 @@ function ContactForm() {
                   type="text"
                   autoComplete="name"
                   required
+                  defaultValue={state.values?.name}
                   className={fieldClassName}
                 />
               </FormField>
@@ -94,6 +134,7 @@ function ContactForm() {
                   type="email"
                   autoComplete="email"
                   required
+                  defaultValue={state.values?.email}
                   className={fieldClassName}
                 />
               </FormField>
@@ -107,16 +148,19 @@ function ContactForm() {
                   type="text"
                   autoComplete="organization"
                   required
+                  defaultValue={state.values?.company}
                   className={fieldClassName}
                 />
               </FormField>
 
               <FormField id="engagement-type" label="Engagement type">
                 <select
+                  ref={selectRef}
                   id="engagement-type"
                   name="engagementType"
                   required
-                  defaultValue=""
+                  value={engagementType}
+                  onChange={(event) => setEngagementType(event.target.value)}
                   className={fieldClassName}
                 >
                   <option value="" disabled>
@@ -137,16 +181,14 @@ function ContactForm() {
                 name="message"
                 rows={5}
                 required
+                defaultValue={state.values?.message}
                 placeholder="Tell us about your goals, timeline, and current AI maturity."
                 className={cn(fieldClassName, "resize-none")}
               />
             </FormField>
 
             <div>
-              <Button type="submit">
-                Request a Strategy Call
-                <Send aria-hidden="true" data-icon="inline-end" />
-              </Button>
+              <SubmitButton />
             </div>
           </form>
         )}
