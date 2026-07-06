@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/Hero";
+import { ProcessSection } from "@/components/home/ProcessSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { TechnologySection } from "@/components/home/TechnologySection";
 import { WhyOrxioSection } from "@/components/home/WhyOrxioSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <PageWrapper>
         <Hero />
         <ServicesSection />
+        <ProcessSection />
         <WhyOrxioSection />
         <TechnologySection />
       </PageWrapper>
