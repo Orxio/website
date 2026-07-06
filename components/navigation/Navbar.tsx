@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
@@ -54,11 +55,15 @@ function Navbar() {
             aria-label="Primary"
             className="flex h-16 items-center justify-between gap-4"
           >
-            <Link
-              href="/"
-              className="font-heading text-lg font-semibold tracking-tight text-foreground"
-            >
-              ORXIO
+            <Link href="/" className="shrink-0">
+              <Image
+                src="/brand/logo-primary.png"
+                alt="ORXIO"
+                width={36}
+                height={36}
+                priority
+                className="size-9 rounded-lg"
+              />
             </Link>
 
             <ul className="hidden items-center gap-8 lg:flex">

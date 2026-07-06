@@ -34,6 +34,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: "/brand/favicon-source.png",
+    apple: "/brand/favicon-source.png",
+  },
   keywords: [
     "AI consulting",
     "AI agents",
@@ -60,11 +64,20 @@ export const metadata: Metadata = {
     siteName,
     title: "ORXIO | AI Consulting & AI Engineering",
     description: siteDescription,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1983,
+        height: 793,
+        alt: "ORXIO",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ORXIO | AI Consulting & AI Engineering",
     description: siteDescription,
+    images: ["/og-image.png"],
   },
 };
 

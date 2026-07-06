@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 import { Container } from "@/components/layout/Container"
@@ -83,11 +84,14 @@ function Footer() {
       <Container size="xl">
         <div className="grid grid-cols-2 gap-10 py-16 sm:py-20 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8">
           <div className="col-span-2 flex flex-col gap-4 lg:col-span-1">
-            <Link
-              href="/"
-              className="font-heading text-lg font-semibold tracking-tight text-foreground"
-            >
-              ORXIO
+            <Link href="/" className="w-fit">
+              <Image
+                src="/brand/logo-primary.png"
+                alt="ORXIO"
+                width={36}
+                height={36}
+                className="size-9 rounded-lg"
+              />
             </Link>
             <Text size="sm" className="font-medium text-foreground">
               Building Intelligent Enterprises.
