@@ -1,3 +1,4 @@
+import { FinalCTASection } from "@/components/home/FinalCTASection";
 import { Hero } from "@/components/home/Hero";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
 import { ProcessSection } from "@/components/home/ProcessSection";
@@ -18,6 +19,7 @@ export default function Home() {
         <WhyOrxioSection />
         <TechnologySection />
         <IndustriesSection />
+        <FinalCTASection />
       </PageWrapper>
     </>
   );
