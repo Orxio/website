@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Container } from "@/components/layout/Container"
 import { Text } from "@/components/typography/Text"
 
+// Placeholders — set the NEXT_PUBLIC_* env vars before production launch.
 const LINKEDIN_URL =
   process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://linkedin.com/company/orxio"
 const GITHUB_URL =

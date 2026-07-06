@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     template: "%s | ORXIO",
   },
   description: siteDescription,
+  alternates: {
+    canonical: siteUrl,
+  },
   keywords: [
     "AI consulting",
     "AI agents",
