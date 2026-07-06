@@ -5,24 +5,17 @@ import { ProcessSection } from "@/components/home/ProcessSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { TechnologySection } from "@/components/home/TechnologySection";
 import { WhyOrxioSection } from "@/components/home/WhyOrxioSection";
-import { PageWrapper } from "@/components/layout/PageWrapper";
-import { Footer } from "@/components/navigation/Footer";
-import { Navbar } from "@/components/navigation/Navbar";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <PageWrapper>
-        <Hero />
-        <ServicesSection />
-        <ProcessSection />
-        <WhyOrxioSection />
-        <TechnologySection />
-        <IndustriesSection />
-        <FinalCTASection />
-      </PageWrapper>
-      <Footer />
+      <Hero />
+      <ServicesSection />
+      <ProcessSection />
+      <WhyOrxioSection />
+      <TechnologySection />
+      <IndustriesSection />
+      <FinalCTASection />
     </>
   );
 }
