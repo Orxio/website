@@ -187,6 +187,22 @@ function ContactForm() {
               />
             </FormField>
 
+            {/* Honeypot: invisible to real users, excluded from the tab order
+                and from assistive tech. Left blank by humans; bots that
+                auto-fill every field trip it. Zero-size + overflow-hidden
+                (rather than absolute positioning) so it never depends on
+                an ancestor's positioning context. */}
+            <div aria-hidden="true" className="h-0 w-0 overflow-hidden opacity-0">
+              <label htmlFor="website">Website</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div>
               <SubmitButton />
             </div>

@@ -39,13 +39,13 @@ function FinalCTASection() {
                 size="sm"
                 className="font-medium tracking-widest text-primary uppercase"
               >
-                Ready to Build Enterprise AI?
+                Enterprise AI Transformation
               </Text>
             </motion.div>
 
             <motion.div variants={slideUp}>
               <Heading as="h2" size="lg">
-                Let&apos;s Design Your AI Strategy Together
+                Ready to Move From Strategy to Production?
               </Heading>
             </motion.div>
 

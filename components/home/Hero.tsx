@@ -41,22 +41,21 @@ function Hero() {
                 size="sm"
                 className="font-medium tracking-widest text-primary uppercase"
               >
-                Enterprise AI Consulting &amp; AI Products
+                Enterprise AI Transformation Partner
               </Text>
             </motion.div>
 
             <motion.div variants={slideUp}>
               <Display as="h1" size="md">
-                Design. Build. Scale. Enterprise AI.
+                From AI Strategy to Production-Grade AI.
               </Display>
             </motion.div>
 
             <motion.div variants={slideUp}>
               <Lead>
-                ORXIO helps organizations design, build, and scale AI
-                solutions through Enterprise AI Consulting, AI Agents,
-                Intelligent Automation, Data Platforms, and Custom AI
-                Applications.
+                ORXIO partners with enterprise leaders to turn AI ambition
+                into measurable business outcomes, from early strategy
+                through production-grade deployment.
               </Lead>
             </motion.div>
 
@@ -72,12 +71,12 @@ function Hero() {
                 Book a Strategy Call
               </Button>
               <Button
-                render={<Link href="/solutions" />}
+                render={<Link href="/services" />}
                 nativeButton={false}
                 variant="outline"
                 className="border-foreground/15 transition-all duration-300 ease-out hover:border-foreground/30 hover:bg-foreground/5 hover:text-foreground"
               >
-                Explore Our Solutions
+                Explore Our Services
               </Button>
             </motion.div>
 
