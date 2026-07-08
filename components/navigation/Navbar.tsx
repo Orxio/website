@@ -45,9 +45,9 @@ function Navbar() {
       </a>
       <header
         className={cn(
-          "sticky top-0 z-40 w-full border-b border-transparent transition-all duration-300",
+          "sticky top-0 z-40 w-full border-b border-transparent transition-all duration-300 ease-out",
           scrolled &&
-            "border-border bg-background/70 shadow-sm backdrop-blur-md"
+            "border-border bg-background/75 shadow-sm backdrop-blur-lg"
         )}
       >
         <Container size="xl">
@@ -59,21 +59,22 @@ function Navbar() {
               <Image
                 src="/brand/logo-primary.png"
                 alt="ORXIO"
-                width={36}
-                height={36}
+                width={40}
+                height={40}
                 priority
-                className="size-9 rounded-lg"
+                className="size-10 rounded-lg"
               />
             </Link>
 
-            <ul className="hidden items-center gap-8 lg:flex">
+            <ul className="hidden items-center gap-10 lg:flex">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    className="group relative text-sm font-medium text-muted-foreground opacity-90 transition-all duration-300 ease-out hover:text-foreground hover:opacity-100"
                   >
                     {item.label}
+                    <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-foreground transition-transform duration-300 ease-out group-hover:scale-x-100" />
                   </Link>
                 </li>
               ))}
@@ -84,7 +85,7 @@ function Navbar() {
               <Button
                 render={<Link href={CTA_HREF} />}
                 nativeButton={false}
-                className="hidden lg:inline-flex"
+                className="hidden px-5 py-2 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md lg:inline-flex"
               >
                 {CTA_LABEL}
               </Button>

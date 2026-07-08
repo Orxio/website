@@ -26,7 +26,7 @@ function Hero() {
   const fade = useMotionPreset("fade")
 
   return (
-    <Section size="lg" className="overflow-hidden">
+    <Section size="lg" className="overflow-hidden pt-[4.8rem] sm:pt-[6.4rem]">
       <Container>
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-12">
           <motion.div
@@ -64,13 +64,18 @@ function Hero() {
               variants={slideUp}
               className="flex flex-col gap-3 sm:flex-row"
             >
-              <Button render={<Link href="/contact" />} nativeButton={false}>
+              <Button
+                render={<Link href="/contact" />}
+                nativeButton={false}
+                className="shadow-md transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg"
+              >
                 Book a Strategy Call
               </Button>
               <Button
                 render={<Link href="/solutions" />}
                 nativeButton={false}
                 variant="outline"
+                className="border-foreground/15 transition-all duration-300 ease-out hover:border-foreground/30 hover:bg-foreground/5 hover:text-foreground"
               >
                 Explore Our Solutions
               </Button>
@@ -96,7 +101,12 @@ function Hero() {
             </motion.ul>
           </motion.div>
 
-          <motion.div initial="hidden" animate="visible" variants={fade}>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fade}
+            className="lg:-translate-x-4 lg:-translate-y-6"
+          >
             <HeroIllustration />
           </motion.div>
         </div>
