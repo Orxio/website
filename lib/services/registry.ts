@@ -1,4 +1,5 @@
 import { AI_AGENTS } from "@/lib/services/content/ai-agents"
+import { CUSTOM_AI_APPLICATIONS } from "@/lib/services/content/custom-ai-applications"
 import { DATA_PLATFORMS } from "@/lib/services/content/data-platforms"
 import { ENTERPRISE_AI_STRATEGY } from "@/lib/services/content/enterprise-ai-strategy"
 import { GENERATIVE_AI_SOLUTIONS } from "@/lib/services/content/generative-ai-solutions"
@@ -12,6 +13,7 @@ const SERVICES: Partial<Record<ServiceSlug, ServicePageContent>> = {
   "intelligent-automation": INTELLIGENT_AUTOMATION,
   "data-platforms": DATA_PLATFORMS,
   "generative-ai": GENERATIVE_AI_SOLUTIONS,
+  "custom-ai-applications": CUSTOM_AI_APPLICATIONS,
 }
 
 function getServiceContent(slug: string): ServicePageContent | undefined {
