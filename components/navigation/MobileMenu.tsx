@@ -3,10 +3,16 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { useMotionPreset } from "@/lib/motion"
+import { cn } from "@/lib/utils"
+
+function isNavItemActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
 
 interface NavItem {
   label: string
@@ -25,6 +31,7 @@ const FOCUSABLE_SELECTOR =
 function MobileMenu({ navItems, ctaLabel, ctaHref }: MobileMenuProps) {
   const [open, setOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   const overlayVariants = useMotionPreset("fade")
   const panelVariants = useMotionPreset("slideDown")
@@ -135,17 +142,24 @@ function MobileMenu({ navItems, ctaLabel, ctaHref }: MobileMenuProps) {
               animate="visible"
               variants={listVariants}
             >
-              {navItems.map((item) => (
-                <motion.div key={item.href} variants={itemVariants}>
-                  <Link
-                    href={item.href}
-                    className="block rounded-md px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </motion.div>
-              ))}
+              {navItems.map((item) => {
+                const active = isNavItemActive(pathname, item.href)
+                return (
+                  <motion.div key={item.href} variants={itemVariants}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "block rounded-md px-3 py-3 text-base font-medium transition-colors duration-200 ease-out hover:bg-muted",
+                        active ? "text-foreground" : "text-foreground/80"
+                      )}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                )
+              })}
             </motion.nav>
 
             <div className="mt-8">
