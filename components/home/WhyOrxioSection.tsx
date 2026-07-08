@@ -3,11 +3,11 @@
 import { motion } from "framer-motion"
 import {
   BarChart3,
+  Building2,
   Handshake,
-  Layers,
-  Rocket,
   Scale,
   ShieldCheck,
+  Target,
   type LucideIcon,
 } from "lucide-react"
 
@@ -26,40 +26,37 @@ interface TrustPillar {
 
 const TRUST_PILLARS: TrustPillar[] = [
   {
-    icon: ShieldCheck,
-    title: "Security by Design",
-    description:
-      "Security, governance, and compliance considerations embedded from day one.",
+    icon: Building2,
+    title: "Enterprise First",
+    description: "Production-ready AI systems designed for scale.",
   },
   {
-    icon: Layers,
-    title: "Built to Scale",
+    icon: Target,
+    title: "Business Before Models",
     description:
-      "Cloud-native architectures designed to grow with your business and workloads.",
-  },
-  {
-    icon: Rocket,
-    title: "Production-Ready AI",
-    description:
-      "From proof of concept to production deployment with reliability and observability in mind.",
-  },
-  {
-    icon: BarChart3,
-    title: "Measurable Outcomes",
-    description:
-      "We focus on business KPIs, operational efficiency, and ROI rather than model benchmarks.",
+      "Every engagement starts with measurable business outcomes.",
   },
   {
     icon: Scale,
-    title: "Responsible AI",
+    title: "Vendor Neutral",
+    description: "Technology selected based on customer needs.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security by Design",
+    description: "Enterprise-grade governance, privacy and architecture.",
+  },
+  {
+    icon: BarChart3,
+    title: "Measurable ROI",
     description:
-      "Human oversight, governance, transparency, and safe AI deployment practices.",
+      "AI initiatives focused on operational and financial impact.",
   },
   {
     icon: Handshake,
     title: "Long-Term Partnership",
     description:
-      "From strategy and implementation to optimization and continuous improvement.",
+      "From strategy through deployment and continuous optimization.",
   },
 ]
 
@@ -69,15 +66,16 @@ function WhyOrxioSection() {
 
   return (
     <Section size="lg">
-      <Container>
+      <Container size="lg">
         <div className="flex flex-col items-start gap-4">
           <Heading as="h2" size="lg">
-            Why ORXIO
+            Why Leading Organizations Choose ORXIO
           </Heading>
           <Text size="lg" className="max-w-prose text-muted-foreground">
-            Enterprise AI requires more than models and prompts. ORXIO
-            designs secure, scalable, and production-ready AI systems built
-            for long-term business value.
+            Enterprises don&apos;t adopt AI for its own sake — they adopt it to
+            move a P&amp;L. ORXIO pairs deep engineering with a
+            business-first delivery model, so every engagement is
+            accountable to outcomes, not just outputs.
           </Text>
         </div>
 
@@ -86,10 +84,10 @@ function WhyOrxioSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {TRUST_PILLARS.map((pillar) => (
-            <motion.div key={pillar.title} variants={slideUp}>
+            <motion.div key={pillar.title} variants={slideUp} className="h-full">
               <TrustPillarCard
                 icon={pillar.icon}
                 title={pillar.title}
