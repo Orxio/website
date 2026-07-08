@@ -4,13 +4,17 @@ import { motion } from "framer-motion"
 
 import { Container } from "@/components/layout/Container"
 import { Section } from "@/components/layout/Section"
-import { FAQS } from "@/components/services/faq-data"
+import { FAQS, type FAQ } from "@/components/services/faq-data"
 import { FAQItem } from "@/components/services/FAQItem"
 import { Heading } from "@/components/typography/Heading"
 import { Text } from "@/components/typography/Text"
 import { useMotionPreset } from "@/lib/motion"
 
-function FAQSection() {
+interface FAQSectionProps {
+  faqs?: FAQ[]
+}
+
+function FAQSection({ faqs = FAQS }: FAQSectionProps) {
   const stagger = useMotionPreset("stagger")
   const slideUp = useMotionPreset("slideUp")
 
@@ -34,7 +38,7 @@ function FAQSection() {
           variants={stagger}
           className="mt-12 flex flex-col"
         >
-          {FAQS.map((faq) => (
+          {faqs.map((faq) => (
             <motion.div key={faq.question} variants={slideUp}>
               <FAQItem question={faq.question} answer={faq.answer} />
             </motion.div>
