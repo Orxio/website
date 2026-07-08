@@ -86,7 +86,7 @@ function ProcessSection() {
               className={cn(
                 "relative",
                 index > 0 &&
-                  "lg:before:absolute lg:before:top-11 lg:before:-left-6 lg:before:h-px lg:before:w-6 lg:before:bg-border lg:before:content-['']"
+                  "lg:before:absolute lg:before:top-12 lg:before:-left-6 lg:before:h-px lg:before:w-6 lg:before:bg-border lg:before:content-['']"
               )}
             >
               <ProcessStep

@@ -62,14 +62,18 @@ function FinalCTASection() {
               variants={slideUp}
               className="flex flex-col gap-3 sm:flex-row"
             >
-              <Button render={<Link href="/contact" />} nativeButton={false}>
+              <Button
+                render={<Link href="/contact" />}
+                nativeButton={false}
+                className="shadow-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg"
+              >
                 Book a Strategy Call
               </Button>
               <Button
                 render={<Link href="/services" />}
                 nativeButton={false}
                 variant="outline"
-                className="border-foreground/15 transition-all duration-300 ease-out hover:-translate-y-px hover:border-foreground/30 hover:bg-foreground/5"
+                className="border-foreground/15 transition-all duration-300 ease-out hover:-translate-y-px hover:border-foreground/30 hover:bg-foreground/5 hover:text-foreground"
               >
                 Explore Services
               </Button>
@@ -82,7 +86,7 @@ function FinalCTASection() {
             >
               {TRUST_ITEMS.map((item) => (
                 <li key={item}>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border/50 px-3 py-1 text-xs text-muted-foreground transition-colors duration-300 ease-out hover:border-foreground/25 hover:text-foreground/80">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border/50 px-2.5 py-1 text-[0.7rem] text-muted-foreground transition-colors duration-300 ease-out hover:border-foreground/25 hover:text-foreground/80">
                     <Check aria-hidden="true" className="size-3.5" />
                     {item}
                   </span>

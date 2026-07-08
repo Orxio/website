@@ -67,7 +67,7 @@ function Hero() {
               <Button
                 render={<Link href="/contact" />}
                 nativeButton={false}
-                className="shadow-md transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg"
+                className="shadow-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Book a Strategy Call
               </Button>
