@@ -22,12 +22,12 @@ const geistMono = Geist_Mono({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://orxio.ai";
 const siteName = "ORXIO";
 const siteDescription =
-  "ORXIO is a premium AI consulting and AI products company delivering enterprise-grade AI agents, generative AI, automation, and data engineering.";
+  "ORXIO is an Enterprise AI Transformation Partner, helping organizations move from AI strategy to production-grade AI systems that deliver measurable business outcomes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "ORXIO | AI Consulting & AI Engineering",
+    default: "ORXIO | Enterprise AI Transformation Partner",
     template: "%s | ORXIO",
   },
   description: siteDescription,
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName,
-    title: "ORXIO | AI Consulting & AI Engineering",
+    title: "ORXIO | Enterprise AI Transformation Partner",
     description: siteDescription,
     images: [
       {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ORXIO | AI Consulting & AI Engineering",
+    title: "ORXIO | Enterprise AI Transformation Partner",
     description: siteDescription,
     images: ["/og-image.png"],
   },

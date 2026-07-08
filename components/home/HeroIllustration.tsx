@@ -1,45 +1,41 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion"
+import Image from "next/image"
+import { useRef, type PointerEvent } from "react"
 
 import { useMotionPreset } from "@/lib/motion"
 
-interface Node {
-  id: string
-  cx: number
-  cy: number
-  r: number
-  colorClass: string
-}
+const HERO_IMAGE_SRC = "/brand/hero-illustration-v2.png"
 
-const NODES: Node[] = [
-  { id: "n1", cx: 240, cy: 120, r: 7, colorClass: "fill-primary" },
-  { id: "n2", cx: 120, cy: 200, r: 5, colorClass: "fill-chart-2" },
-  { id: "n3", cx: 340, cy: 190, r: 6, colorClass: "fill-chart-3" },
-  { id: "n4", cx: 200, cy: 280, r: 4, colorClass: "fill-chart-4" },
-  { id: "n5", cx: 320, cy: 320, r: 5, colorClass: "fill-chart-5" },
-  { id: "n6", cx: 100, cy: 320, r: 4, colorClass: "fill-primary" },
-  { id: "n7", cx: 380, cy: 300, r: 3, colorClass: "fill-chart-2" },
-]
+const EDGE_MASK =
+  "radial-gradient(ellipse 68% 68% at 50% 50%, black 52%, transparent 100%)"
 
-const CONNECTIONS: [string, string][] = [
-  ["n1", "n2"],
-  ["n1", "n3"],
-  ["n2", "n4"],
-  ["n3", "n5"],
-  ["n4", "n5"],
-  ["n2", "n6"],
-  ["n3", "n7"],
-  ["n5", "n7"],
-]
-
-function findNode(id: string) {
-  return NODES.find((node) => node.id === id)!
-}
-
-/** Decorative abstract node network — no photography, no literal AI iconography. */
+/** Premium hero artwork — a single image blended into the page with glow, an edge mask, and subtle motion. */
 function HeroIllustration() {
   const fade = useMotionPreset("fade")
+  const reduceMotion = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const pointerX = useMotionValue(0)
+  const pointerY = useMotionValue(0)
+  const springX = useSpring(pointerX, { stiffness: 60, damping: 20, mass: 0.6 })
+  const springY = useSpring(pointerY, { stiffness: 60, damping: 20, mass: 0.6 })
+  const parallaxX = useTransform(springX, [-0.5, 0.5], [-8, 8])
+  const parallaxY = useTransform(springY, [-0.5, 0.5], [-8, 8])
+
+  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+    if (reduceMotion) return
+    const bounds = containerRef.current?.getBoundingClientRect()
+    if (!bounds) return
+    pointerX.set((event.clientX - bounds.left) / bounds.width - 0.5)
+    pointerY.set((event.clientY - bounds.top) / bounds.height - 0.5)
+  }
+
+  function handlePointerLeave() {
+    pointerX.set(0)
+    pointerY.set(0)
+  }
 
   return (
     <motion.div
@@ -47,72 +43,64 @@ function HeroIllustration() {
       animate="visible"
       variants={fade}
       aria-hidden="true"
-      className="relative mx-auto aspect-square w-full max-w-md"
+      className="relative mx-auto w-full max-w-[59.9rem] lg:max-w-[67.3rem]"
     >
-      <div className="absolute inset-0 rounded-[2.5rem] border border-border/60 bg-gradient-to-br from-foreground/[0.04] via-transparent to-primary/[0.06] shadow-2xl backdrop-blur-xl" />
-      <div className="absolute inset-6 rounded-[2rem] border border-border/40" />
+      {/* premium blurred background glow */}
+      <div className="pointer-events-none absolute inset-[-7%] -z-10 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute inset-[30%] -z-10 rounded-full bg-foreground/10 blur-2xl" />
 
-      <svg
-        viewBox="0 0 480 480"
-        className="relative h-full w-full"
-        fill="none"
+      <div
+        ref={containerRef}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        className="relative"
       >
-        <defs>
-          <radialGradient id="hero-glow" cx="50%" cy="45%" r="55%">
-            <stop offset="0%" style={{ stopColor: "var(--primary)" }} stopOpacity={0.16} />
-            <stop offset="100%" style={{ stopColor: "var(--primary)" }} stopOpacity={0} />
-          </radialGradient>
-          <pattern
-            id="hero-grid"
-            width={40}
-            height={40}
-            patternUnits="userSpaceOnUse"
+        {/* mouse parallax layer */}
+        <motion.div
+          style={reduceMotion ? undefined : { x: parallaxX, y: parallaxY }}
+          className="relative"
+        >
+          {/* ambient float / drift / rotation / breathing layer */}
+          <motion.div
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    x: [0, 6, -4, 0],
+                    y: [0, -12, 4, 0],
+                    rotate: [0, 0.8, -0.6, 0],
+                    scale: [1, 1.02, 1.01, 1],
+                  }
+            }
+            transition={
+              reduceMotion
+                ? undefined
+                : {
+                    x: { duration: 13, repeat: Infinity, ease: "easeInOut" },
+                    y: { duration: 11, repeat: Infinity, ease: "easeInOut" },
+                    rotate: { duration: 15, repeat: Infinity, ease: "easeInOut" },
+                    scale: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+                  }
+            }
+            className="relative aspect-[3/2] w-full"
+            style={{
+              WebkitMaskImage: EDGE_MASK,
+              maskImage: EDGE_MASK,
+            }}
           >
-            <circle cx={1} cy={1} r={1} className="fill-border" />
-          </pattern>
-        </defs>
-
-        <rect width="480" height="480" fill="url(#hero-grid)" opacity={0.5} />
-        <circle cx="240" cy="240" r="220" fill="url(#hero-glow)" />
-
-        <rect
-          x="150"
-          y="70"
-          width="150"
-          height="150"
-          rx="24"
-          className="stroke-border"
-          strokeOpacity={0.5}
-          transform="rotate(12 225 145)"
-        />
-
-        {CONNECTIONS.map(([fromId, toId]) => {
-          const from = findNode(fromId)
-          const to = findNode(toId)
-          return (
-            <line
-              key={`${fromId}-${toId}`}
-              x1={from.cx}
-              y1={from.cy}
-              x2={to.cx}
-              y2={to.cy}
-              className="stroke-foreground"
-              strokeOpacity={0.12}
-              strokeWidth={1.5}
+            <Image
+              src={HERO_IMAGE_SRC}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 1079px, (min-width: 640px) 958px, 90vw"
+              quality={90}
+              className="object-contain drop-shadow-2xl"
             />
-          )
-        })}
-
-        {NODES.map((node) => (
-          <circle
-            key={node.id}
-            cx={node.cx}
-            cy={node.cy}
-            r={node.r}
-            className={node.colorClass}
-          />
-        ))}
-      </svg>
+            {/* glass reflection overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/10 via-transparent to-transparent" />
+          </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   )
 }

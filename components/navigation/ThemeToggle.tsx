@@ -30,6 +30,7 @@ function ThemeToggle() {
         size="icon"
         aria-label="Toggle theme"
         disabled
+        className="rounded-full"
       >
         <Sun aria-hidden="true" />
       </Button>
@@ -44,6 +45,7 @@ function ThemeToggle() {
       size="icon"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="rounded-full transition-all duration-300 ease-out hover:bg-muted hover:opacity-100"
     >
       {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
     </Button>

@@ -2,13 +2,11 @@
 
 import { motion } from "framer-motion"
 import {
-  Briefcase,
   Building2,
-  Cpu,
   Factory,
   HeartPulse,
   Landmark,
-  ShoppingCart,
+  ShoppingBag,
   Truck,
   type LucideIcon,
 } from "lucide-react"
@@ -24,55 +22,51 @@ interface Industry {
   icon: LucideIcon
   title: string
   description: string
+  tags: [string, string, string]
 }
 
 const INDUSTRIES: Industry[] = [
   {
+    icon: Factory,
+    title: "Manufacturing",
+    description:
+      "AI copilots, predictive maintenance, quality inspection, knowledge assistants, factory automation.",
+    tags: ["Production", "Quality", "Operations"],
+  },
+  {
     icon: Landmark,
     title: "Financial Services",
     description:
-      "Fraud detection, underwriting, customer service, and document intelligence.",
+      "Customer support, risk analysis, document intelligence, fraud workflows, internal copilots.",
+    tags: ["Banking", "Insurance", "Compliance"],
   },
   {
     icon: HeartPulse,
     title: "Healthcare",
     description:
-      "Clinical workflows, patient engagement, and knowledge assistants.",
+      "Clinical documentation, patient support, knowledge search, workflow automation, secure AI systems.",
+    tags: ["Providers", "Hospitals", "Operations"],
   },
   {
-    icon: Factory,
-    title: "Manufacturing",
-    description:
-      "Predictive maintenance, quality assurance, and operations intelligence.",
-  },
-  {
-    icon: ShoppingCart,
+    icon: ShoppingBag,
     title: "Retail & Commerce",
     description:
-      "Recommendations, customer support, and inventory intelligence.",
-  },
-  {
-    icon: Building2,
-    title: "Real Estate",
-    description:
-      "Lead intelligence, property insights, and customer engagement.",
+      "Customer service, recommendation engines, inventory intelligence, marketing automation.",
+    tags: ["Retail", "Commerce", "CX"],
   },
   {
     icon: Truck,
-    title: "Logistics & Mobility",
+    title: "Logistics & Supply Chain",
     description:
-      "Route optimization, fleet intelligence, and operations automation.",
+      "Fleet intelligence, shipment visibility, warehouse copilots, forecasting, route optimization.",
+    tags: ["Fleet", "Warehouse", "Planning"],
   },
   {
-    icon: Cpu,
-    title: "SaaS & Technology",
-    description: "AI copilots, workflow automation, and knowledge systems.",
-  },
-  {
-    icon: Briefcase,
-    title: "Professional Services",
+    icon: Building2,
+    title: "Enterprise Operations",
     description:
-      "Research assistants, document workflows, and client intelligence.",
+      "HR, Finance, Legal, IT, Procurement, and enterprise workflow automation.",
+    tags: ["HR", "Finance", "Operations"],
   },
 ]
 
@@ -82,15 +76,15 @@ function IndustriesSection() {
 
   return (
     <Section size="lg">
-      <Container>
+      <Container size="lg">
         <div className="flex flex-col items-start gap-4">
           <Heading as="h2" size="lg">
-            Industries We Serve
+            Industries We Transform
           </Heading>
           <Text size="lg" className="max-w-prose text-muted-foreground">
-            ORXIO helps organizations across industries design, deploy, and
-            scale intelligent systems tailored to their operational
-            challenges and opportunities.
+            Every industry has different workflows, regulations, and data
+            challenges. ORXIO designs AI solutions that fit each business
+            domain instead of forcing generic models into every problem.
           </Text>
         </div>
 
@@ -99,14 +93,15 @@ function IndustriesSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {INDUSTRIES.map((industry) => (
-            <motion.div key={industry.title} variants={slideUp}>
+            <motion.div key={industry.title} variants={slideUp} className="h-full">
               <IndustryCard
                 icon={industry.icon}
                 title={industry.title}
                 description={industry.description}
+                tags={industry.tags}
               />
             </motion.div>
           ))}

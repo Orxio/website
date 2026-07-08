@@ -22,6 +22,7 @@ interface Service {
   icon: LucideIcon
   title: string
   description: string
+  href: string
 }
 
 const SERVICES: Service[] = [
@@ -30,36 +31,42 @@ const SERVICES: Service[] = [
     title: "Enterprise AI Strategy",
     description:
       "AI strategy, use case discovery, roadmap creation, and transformation planning.",
+    href: "/services/enterprise-ai-strategy",
   },
   {
     icon: Sparkles,
     title: "AI Agents",
     description:
       "Task automation, multi-agent systems, copilots, and intelligent assistants.",
+    href: "/services/ai-agents",
   },
   {
     icon: Workflow,
     title: "Intelligent Automation",
     description:
       "Workflow automation and operational efficiency powered by AI.",
+    href: "/services/intelligent-automation",
   },
   {
     icon: Database,
     title: "Data Platforms",
     description:
       "Modern data foundations designed for analytics, AI, and decision intelligence.",
+    href: "/services/data-platforms",
   },
   {
     icon: Wand2,
     title: "Generative AI Solutions",
     description:
       "Enterprise copilots, semantic search, knowledge assistants, and GenAI products.",
+    href: "/services/generative-ai",
   },
   {
     icon: AppWindow,
     title: "Custom AI Applications",
     description:
       "Secure, scalable AI applications tailored to your business requirements.",
+    href: "/services/custom-ai-applications",
   },
 ]
 
@@ -86,14 +93,15 @@ function ServicesSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {SERVICES.map((service) => (
-            <motion.div key={service.title} variants={slideUp}>
+            <motion.div key={service.title} variants={slideUp} className="h-full">
               <ServiceCard
                 icon={service.icon}
                 title={service.title}
                 description={service.description}
+                href={service.href}
               />
             </motion.div>
           ))}

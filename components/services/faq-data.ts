@@ -23,7 +23,7 @@ const FAQS: FAQ[] = [
   {
     question: "What industries do you work with?",
     answer:
-      "We support organizations across financial services, healthcare, manufacturing, retail, logistics, real estate, SaaS, and professional services.",
+      "We support organizations across manufacturing, financial services, healthcare, retail and commerce, logistics and supply chain, and enterprise operations.",
   },
   {
     question: "How do you approach security and governance?",

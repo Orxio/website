@@ -44,6 +44,14 @@ async function submitContactForm(
   _prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
+  // Honeypot: a hidden field real users never see or fill. Bots that
+  // auto-fill every field in a form trip it. Report success without
+  // sending anything, so scripted submitters have no signal to adapt to.
+  const honeypot = String(formData.get("website") ?? "").trim()
+  if (honeypot) {
+    return { status: "success" }
+  }
+
   const submission: ContactSubmission = {
     name: String(formData.get("name") ?? "").trim(),
     email: String(formData.get("email") ?? "").trim(),
