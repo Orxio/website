@@ -17,9 +17,6 @@ function isNavItemActive(pathname: string, href: string) {
 
 const NAV_ITEMS = [
   { label: "Services", href: "/services" },
-  { label: "Products", href: "/products" },
-  { label: "Industries", href: "/industries" },
-  { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ]

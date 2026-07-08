@@ -29,15 +29,12 @@ const SERVICES_LINKS: FooterLink[] = [
 
 const COMPANY_LINKS: FooterLink[] = [
   { label: "About", href: "/about" },
-  { label: "Industries", href: "/industries" },
-  { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ]
 
 const LEGAL_LINKS: FooterLink[] = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-  { label: "Cookies", href: "/cookies" },
 ]
 
 function LinkedInIcon({ className }: { className?: string }) {
@@ -112,7 +109,7 @@ function Footer() {
               />
             </Link>
             <Text size="sm" className="max-w-xs text-muted-foreground">
-              From Strategic Consulting to Production-Grade AI.
+              From AI Strategy to Production-Grade AI.
             </Text>
             <ul className="flex items-center gap-2">
               <li>
