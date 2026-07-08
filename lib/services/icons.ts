@@ -1,11 +1,13 @@
 import {
   Activity,
+  AlertTriangle,
   AppWindow,
   ArrowLeftRight,
   ClipboardCheck,
   Compass,
   Database,
   Eye,
+  FileText,
   FlaskConical,
   ListFilter,
   ListOrdered,
@@ -20,17 +22,20 @@ import {
   Target,
   Users,
   Workflow,
+  Zap,
   type LucideIcon,
 } from "lucide-react"
 
 const ICON_MAP = {
   Activity,
+  AlertTriangle,
   AppWindow,
   ArrowLeftRight,
   ClipboardCheck,
   Compass,
   Database,
   Eye,
+  FileText,
   FlaskConical,
   ListFilter,
   ListOrdered,
@@ -45,6 +50,7 @@ const ICON_MAP = {
   Target,
   Users,
   Workflow,
+  Zap,
 } as const satisfies Record<string, LucideIcon>
 
 type IconKey = keyof typeof ICON_MAP
